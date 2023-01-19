@@ -16,16 +16,16 @@
   <body style="height:100vh;width:100vw;margin:0;padding:0;background-color:antiquewhite;">
     <!-- start layout -->
     <div style="height:10%;">
-        <h1 style="text-align:center;font-size:8vh;color: darkslategray;margin:0;padding:0" onclick="window.location.reload();">TicTacToe MMO</h1>
+        <h1 style="text-align:center;font-size:8vh;color: darkslategray;margin:0;padding:0" onclick="window.location.reload();">Checkers MMO</h1>
     </div>
     <div style="height:4%;">
         <h1 id="userAddress" style="text-align:center;font-size:2.5vh;color:dimgray;margin:0;padding:0;">welcome back: 0x0000000000000000000000000000000000000000</h1>
     </div>
     <div style="height:3%;">
-        <h1 id="coins" style="text-align:center;font-size:3vh;color:chocolate;margin:0;padding:0" onclick="drawCoinsOf();">0 coins</h1>
+        <h1 id="coins" style="text-align:center;font-size:3vh;color:chocolate;margin:0;padding:0;" onclick="drawCoinsOf();">0 &#x1F39F;</h1>
     </div>
     <div id="stats" style="height:3%;text-align:center;">
-        <button style="text-align:center;font-size:2vh;height:3vh;width:5wh;border:none;background:none;color:darkolivegreen;cursor:pointer" onclick="buy10Coins()">buy +10 coins for 1 ETH</button>
+        <button style="text-align:center;font-size:2vh;height:3vh;width:5wh;border:none;background:none;color:darkolivegreen;cursor:pointer" onclick="buy10Coins()">buy +10 &#x1F39F; for 1 ETH</button>
     </div>
     <div id="main" style="height:70%;display:flex;">
         <div style="height:100%;width:35%;text-align:center;";>
@@ -55,84 +55,84 @@
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">H</div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;"></div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">8</div>
-                <div id="field_11" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(11)"></div>
-                <div id="field_12" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(12)"></div>
-                <div id="field_13" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(13)"></div>
-                <div id="field_14" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(14)"></div>
-                <div id="field_15" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(15)"></div>
-                <div id="field_16" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(16)"></div>
-                <div id="field_17" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(17)"></div>
-                <div id="field_18" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(18)"></div>
+                <div id="field_8A" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('8A')" onclick="clickedField('8A')"></div>
+                <div id="field_8B" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('8B')" onclick="clickedField('8B')"></div>
+                <div id="field_8C" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('8C')" onclick="clickedField('8C')"></div>
+                <div id="field_8D" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('8D')" onclick="clickedField('8D')"></div>
+                <div id="field_8E" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('8E')" onclick="clickedField('8E')"></div>
+                <div id="field_8F" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('8F')" onclick="clickedField('8F')"></div>
+                <div id="field_8G" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('8G')" onclick="clickedField('8G')"></div>
+                <div id="field_8H" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('8H')" onclick="clickedField('8H')"></div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">8</div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">7</div>
-                <div id="field_21" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(21)"></div>
-                <div id="field_22" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(22)"></div>
-                <div id="field_23" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(23)"></div>
-                <div id="field_24" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(24)"></div>
-                <div id="field_25" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(25)"></div>
-                <div id="field_26" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(26)"></div>
-                <div id="field_27" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(27)"></div>
-                <div id="field_28" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(28)"></div>
+                <div id="field_7A" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('7A')" onclick="clickedField('7A')"></div>
+                <div id="field_7B" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('7B')" onclick="clickedField('7B')"></div>
+                <div id="field_7C" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('7C')" onclick="clickedField('7C')"></div>
+                <div id="field_7D" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('7D')" onclick="clickedField('7D')"></div>
+                <div id="field_7E" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('7E')" onclick="clickedField('7E')"></div>
+                <div id="field_7F" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('7F')" onclick="clickedField('7F')"></div>
+                <div id="field_7G" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('7G')" onclick="clickedField('7G')"></div>
+                <div id="field_7H" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('7H')" onclick="clickedField('7H')"></div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">7</div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">6</div>
-                <div id="field_31" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(31)"></div>
-                <div id="field_32" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(32)"></div>
-                <div id="field_33" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(33)"></div>
-                <div id="field_34" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(34)"></div>
-                <div id="field_35" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(35)"></div>
-                <div id="field_36" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(36)"></div>
-                <div id="field_37" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(37)"></div>
-                <div id="field_38" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(38)"></div>
+                <div id="field_6A" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('6A')" onclick="clickedField('6A')"></div>
+                <div id="field_6B" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('6B')" onclick="clickedField('6B')"></div>
+                <div id="field_6C" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('6C')" onclick="clickedField('6C')"></div>
+                <div id="field_6D" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('6D')" onclick="clickedField('6D')"></div>
+                <div id="field_6E" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('6E')" onclick="clickedField('6E')"></div>
+                <div id="field_6F" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('6F')" onclick="clickedField('6F')"></div>
+                <div id="field_6G" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('6G')" onclick="clickedField('6G')"></div>
+                <div id="field_6H" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('6H')" onclick="clickedField('6H')"></div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">6</div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">5</div>
-                <div id="field_41" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(41)"></div>
-                <div id="field_42" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(42)"></div>
-                <div id="field_43" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(43)"></div>
-                <div id="field_44" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(44)"></div>
-                <div id="field_45" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(45)"></div>
-                <div id="field_46" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(46)"></div>
-                <div id="field_47" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(47)"></div>
-                <div id="field_48" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(48)"></div>
+                <div id="field_5A" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('5A')" onclick="clickedField('5A')"></div>
+                <div id="field_5B" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('5B')" onclick="clickedField('5B')"></div>
+                <div id="field_5C" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('5C')" onclick="clickedField('5C')"></div>
+                <div id="field_5D" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('5D')" onclick="clickedField('5D')"></div>
+                <div id="field_5E" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('5E')" onclick="clickedField('5E')"></div>
+                <div id="field_5F" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('5F')" onclick="clickedField('5F')"></div>
+                <div id="field_5G" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('5G')" onclick="clickedField('5G')"></div>
+                <div id="field_5H" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('5H')" onclick="clickedField('5H')"></div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">5</div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">4</div>
-                <div id="field_51" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(51)"></div>
-                <div id="field_52" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(52)"></div>
-                <div id="field_53" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(53)"></div>
-                <div id="field_54" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(54)"></div>
-                <div id="field_55" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(55)"></div>
-                <div id="field_56" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(56)"></div>
-                <div id="field_57" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(57)"></div>
-                <div id="field_58" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(58)"></div>
+                <div id="field_4A" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('4A')" onclick="clickedField('4A')"></div>
+                <div id="field_4B" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('4B')" onclick="clickedField('4B')"></div>
+                <div id="field_4C" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('4C')" onclick="clickedField('4C')"></div>
+                <div id="field_4D" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('4D')" onclick="clickedField('4D')"></div>
+                <div id="field_4E" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('4E')" onclick="clickedField('4E')"></div>
+                <div id="field_4F" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('4F')" onclick="clickedField('4F')"></div>
+                <div id="field_4G" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('4G')" onclick="clickedField('4G')"></div>
+                <div id="field_4H" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('4H')" onclick="clickedField('4H')"></div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">4</div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">3</div>
-                <div id="field_61" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(61)"></div>
-                <div id="field_62" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(62)"></div>
-                <div id="field_63" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(63)"></div>
-                <div id="field_64" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(64)"></div>
-                <div id="field_65" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(65)"></div>
-                <div id="field_66" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(66)"></div>
-                <div id="field_67" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(67)"></div>
-                <div id="field_68" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(68)"></div>
+                <div id="field_3A" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('3A')" onclick="clickedField('3A')"></div>
+                <div id="field_3B" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('3B')" onclick="clickedField('3B')"></div>
+                <div id="field_3C" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('3C')" onclick="clickedField('3C')"></div>
+                <div id="field_3D" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('3D')" onclick="clickedField('3D')"></div>
+                <div id="field_3E" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('3E')" onclick="clickedField('3E')"></div>
+                <div id="field_3F" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('3F')" onclick="clickedField('3F')"></div>
+                <div id="field_3G" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('3G')" onclick="clickedField('3G')"></div>
+                <div id="field_3H" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('3H')" onclick="clickedField('3H')"></div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">3</div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">2</div>
-                <div id="field_71" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(71)"></div>
-                <div id="field_72" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(72)"></div>
-                <div id="field_73" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(73)"></div>
-                <div id="field_74" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(74)"></div>
-                <div id="field_75" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(75)"></div>
-                <div id="field_76" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(76)"></div>
-                <div id="field_77" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" onclick="clickedField(77)"></div>
-                <div id="field_78" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" onclick="clickedField(78)"></div>
+                <div id="field_2A" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('2A')" onclick="clickedField('2A')"></div>
+                <div id="field_2B" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('2B')" onclick="clickedField('2B')"></div>
+                <div id="field_2C" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('2C')" onclick="clickedField('2C')"></div>
+                <div id="field_2D" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('2D')" onclick="clickedField('2D')"></div>
+                <div id="field_2E" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('2E')" onclick="clickedField('2E')"></div>
+                <div id="field_2F" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('2F')" onclick="clickedField('2F')"></div>
+                <div id="field_2G" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('2G')" onclick="clickedField('2G')"></div>
+                <div id="field_2H" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('2H')" onclick="clickedField('2H')"></div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">2</div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">1</div>
-                <div id="field_1A" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="clickedField('1A')" onclick="doubleClickedField('1A')">X</div>
-                <div id="field_1B" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="clickedField('1B')" onclick="doubleClickedField('1B')">X</div>
-                <div id="field_1C" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="clickedField('1C')" onclick="doubleClickedField('1C')">X</div>
-                <div id="field_1D" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="clickedField('1D')" onclick="doubleClickedField('1D')">X</div>
-                <div id="field_1E" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="clickedField('1E')" onclick="doubleClickedField('1E')">X</div>
-                <div id="field_1F" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="clickedField('1F')" onclick="doubleClickedField('1F')">X</div>
-                <div id="field_1G" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="clickedField('1G')" onclick="doubleClickedField('1G')">X</div>
-                <div id="field_1H" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="clickedField('1H')" onclick="doubleClickedField('1H')">X</div>
+                <div id="field_1A" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('1A')" onclick="clickedField('1A')"></div>
+                <div id="field_1B" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('1B')" onclick="clickedField('1B')"></div>
+                <div id="field_1C" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('1C')" onclick="clickedField('1C')"></div>
+                <div id="field_1D" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('1D')" onclick="clickedField('1D')"></div>
+                <div id="field_1E" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('1E')" onclick="clickedField('1E')"></div>
+                <div id="field_1F" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('1F')" onclick="clickedField('1F')"></div>
+                <div id="field_1G" style="display:inline-block;width:3vw;height:3vw;background-color:darkolivegreen;" ondblclick="doubleClickedField('1G')" onclick="clickedField('1G')"></div>
+                <div id="field_1H" style="display:inline-block;width:3vw;height:3vw;background-color:bisque;" ondblclick="doubleClickedField('1H')" onclick="clickedField('1H')"></div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">1</div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;"></div>
                 <div style="display:inline-block;width:3vw;height:3vw;background-color:gainsboro;font-size:2vw;color:chocolate;">A</div>
@@ -156,11 +156,17 @@
         </div>
     </div>
     <div style="height:3%;display:flex;">
-        <div style="height:100%;width:50%;">
-            <div style="text-align:right;font-size:2.5vh;height:3vh;width:5wh;color:dimgray;">make move:</div>
+        <div style="height:100%;width:43vw;">
+            <div style="text-align:right;font-size:2.5vh;height:3vh;width:100%;color:dimgray;">move:</div>
         </div>
-        <div style="height:100%;width:3%;">
-            <input id="userInput" type="number" min="0" max="8" style="width:100%;font-size:2vh;"></input>
+        <div style="height:100%;width:5vw;">
+            <input id="userInputFrom" type="text" min="0" max="8" style="width:100%;font-size:2vh;"></input>
+        </div>
+        <div style="height:100%;width:4vw;">
+            <div style="text-align:center;font-size:2.5vh;height:3vh;width:5ww;color:dimgray;">&#8594;</div>
+        </div>
+        <div style="height:100%;width:5vw;">
+            <input id="userInputTo" type="text" min="0" max="8" style="width:100%;font-size:2vh;"></input>
         </div>
     </div>
     <div style="height:3%;text-align: center;">
@@ -168,7 +174,7 @@
             <div style="text-align:center;font-size:2.5vh;height:3vh;color:darkolivegreen;">send now!</div>
     </div>
     <div style="height:4%;">
-        <h1 id="messageBox" style="text-align:center;font-size:3vh;color:chocolate;margin:0;padding:0" >| this is a very long message to inform you that everything works |</h1>
+        <h1 id="messageBox" style="text-align:center;font-size:3vh;color:chocolate;margin:0;padding:0" >| please install metamask |</h1>
     </div>
     <!-- contract details  -->
     <script>
@@ -444,7 +450,7 @@
     <script>
         var currentGameId;
 
-        async function startTicTacToeDapp() {
+        async function startCheckersDapp() {
             var values = await getBothWeb3();
             const web3 = values[0];
             const web3Event = values[1];
@@ -471,9 +477,9 @@
             // event: NewPlayerAdded (reload "start new game" overview)
             smartContractOverWebSocket.events.NewPlayerAdded().on("data", function(event) {
                 console.log("newPlayerAdded event was called");
-                setTimeout(()=>{drawAllPlayers();},100);
-                setTimeout(()=>{drawAllPlayers();},3000);
-                setTimeout(()=>{drawAllPlayers();},10000);
+                setTimeout(()=>{drawAllPlayers();},1000);
+                setTimeout(()=>{drawAllPlayers();},4000);
+                setTimeout(()=>{drawAllPlayers();},16000);
             }).on("error", console.error);
 
             // event NewMatchCreated(address indexed _player1, address indexed _player2);
@@ -483,9 +489,9 @@
                 let player2 = event.returnValues['_player2'];
                 if(userAccount == player1 || userAccount == player2){
                     writeMessageInMessageBox("you are in a new game - load game to start");
-                    setTimeout(()=>{drawAllActiveGamesForPlayer();drawCoinsOf(userAccount);},100);
-                    setTimeout(()=>{drawAllActiveGamesForPlayer();drawCoinsOf(userAccount);},3000);
-                    setTimeout(()=>{drawAllActiveGamesForPlayer();drawCoinsOf(userAccount);},10000);
+                    setTimeout(()=>{drawAllActiveGamesForPlayer();drawCoinsOf(userAccount);},1000);
+                    setTimeout(()=>{drawAllActiveGamesForPlayer();drawCoinsOf(userAccount);},4000);
+                    setTimeout(()=>{drawAllActiveGamesForPlayer();drawCoinsOf(userAccount);},16000);
                 }
             }).on("error", console.error);
 
@@ -502,9 +508,9 @@
                     }
                     // delay a bit, sothat node has fully stored new state
                     // sometimes it takes really long :(
-                    setTimeout(()=>{drawGameField(currentGameId);},100);
-                    setTimeout(()=>{drawGameField(currentGameId);},3000);
-                    setTimeout(()=>{drawGameField(currentGameId);},10000);
+                    setTimeout(()=>{drawGameField(currentGameId);},1000);
+                    setTimeout(()=>{drawGameField(currentGameId);},4000);
+                    setTimeout(()=>{drawGameField(currentGameId);},16000);
                 }
             }).on("error", console.error);
             
@@ -514,9 +520,9 @@
                 let winner = event.returnValues['_winner'];
                 let gameId = event.returnValues['_gameId'];
                 console.log(`the winner is ${winner}`);
-                setTimeout(()=>{drawGameField(currentGameId);},100);
-                setTimeout(()=>{drawGameField(currentGameId);},3000);
-                setTimeout(()=>{drawGameField(currentGameId);},10000);
+                setTimeout(()=>{drawGameField(currentGameId);},1000);
+                setTimeout(()=>{drawGameField(currentGameId);},4000);
+                setTimeout(()=>{drawGameField(currentGameId);},16000);
                 // check if gameId is current game (if not, do not notify player)
                 if(gameId == currentGameId) {
                     if(winner == "0x0000000000000000000000000000000000000000") {
@@ -529,15 +535,15 @@
                         // lost
                         writeMessageInMessageBox("you lost!");
                     }
-                    setTimeout(()=>{drawAllActiveGamesForPlayer();drawCoinsOf(userAccount);},100);
-                    setTimeout(()=>{drawAllActiveGamesForPlayer();drawCoinsOf(userAccount);},3000);
-                    setTimeout(()=>{drawAllActiveGamesForPlayer();drawCoinsOf(userAccount);},10000);
+                    setTimeout(()=>{drawAllActiveGamesForPlayer();drawCoinsOf(userAccount);},1000);
+                    setTimeout(()=>{drawAllActiveGamesForPlayer();drawCoinsOf(userAccount);},4000);
+                    setTimeout(()=>{drawAllActiveGamesForPlayer();drawCoinsOf(userAccount);},16000);
 
                 }
             }).on("error", console.error);
             
         }
-        startTicTacToeDapp();
+        startCheckersDapp();
 
         function writeMessageInMessageBox(_message) {
             document.getElementById("messageBox").innerHTML = `| ${_message} |`;
@@ -601,7 +607,7 @@
         async function drawCoinsOf() {
             // global var coins
             var c = await smartContract.methods.coinsOfPlayer(userAccount).call();
-            document.getElementById("coins").innerHTML = `${c} coins`;
+            document.getElementById("coins").innerHTML = `${c} &#x1F39F;`;
         }
 
         async function buy10Coins() {
@@ -609,7 +615,7 @@
             // pay 1 ETH and get 10 coins
             await smartContract.methods.depositEtherForCoins().send( {from: userAccount,value: "1000000000000000000"})
             .on("receipt", function(receipt) {
-                writeMessageInMessageBox("payment successful: +10 coins");
+                writeMessageInMessageBox("payment successful: +10 coins;");
             })
             .on("error", function(error) {
                 console.log(`payment failed: ${error}`);
@@ -661,28 +667,36 @@
                 return;
             }
             let ticTacToeGameStruct = await smartContract.methods.getBoard(_gameId).call();
-            for (let i=0; i<9; i++) {
-                marker = ticTacToeGameStruct[i];
-                // marker=0: empty marker=1: player1 marker=2: player2
-                var sign;
-                switch(marker) {
+
+            for (let z=1; z<9;z++) {
+                for (let n=0; n<8;n++) {
+                    const c = ['A','B', 'C', 'D', 'E', 'F', 'G', 'H'];
+                    marker = ticTacToeGameStruct[z-1][n];
+                    
+                    switch(marker) {
                     case "1":
-                        sign = "X";
+                        sign = "&#9898;";
                         break;
                     case "2":
-                        sign = "O";
+                        sign = "&#9899;";
                         break;
                     default:
                         sign = "";
+                    }
+                    $(`#field_${z}${c[n]}`).empty()
+                    $(`#field_${z}${c[n]}`).append(`<div style="font-size: 1.5vw;">${sign}</div>`);
                 }
-                $(`#field_${i}`).empty()
-                $(`#field_${i}`).append(`${sign}`)
             }
+
         }
 
         function clearGameField(){
-            for (let i=0; i<9; i++) {
-                $(`#field_${i}`).empty()
+            for (let z=0; z<8;z++) {
+                for (let n=0; n<8;n++) {
+                    const c = ['A','B', 'C', 'D', 'E', 'F', 'G', 'H'];
+                    $(`#field_${z+1}${c[n]}`).empty()
+                    console.log(`cleared field: ${z+1}${c[n]}`);
+                }
             }
         }
 
@@ -712,9 +726,9 @@
             if(userAccount == nextPlayer){
                 // it is this players turn
                 if(userAccount == player1){
-                    writeMessageInMessageBox("it is your turn - place an X");
+                    writeMessageInMessageBox("it is your turn - you are white");
                 }else{
-                    writeMessageInMessageBox("it is your turn - place an O");
+                    writeMessageInMessageBox("it is your turn - you are black");
                 }
             }else{
                 writeMessageInMessageBox("waiting for opponent");
@@ -723,13 +737,14 @@
         }
 
         function clickedField(_position) {
-            document.getElementById("userInput").value = _position;
-            writeMessageInMessageBox(`move from ${_position}`);
+            document.getElementById("userInputTo").value = _position;
+            writeMessageInMessageBox(`move to ${_position}`);
         }
 
         function doubleClickedField(_position) {
-            //document.getElementById("userInput").value = _position;
-            writeMessageInMessageBox(`move to ${_position}`);
+            document.getElementById("userInputFrom").value = _position;
+            document.getElementById("userInputTo").value = '';
+            writeMessageInMessageBox(`move from ${_position}`);
         }
 
         async function makeGameMove() {
@@ -737,8 +752,9 @@
                 writeMessageInMessageBox("load or start new game");
                 return;
             }
-            var move = document.getElementById("userInput").value;
-            await smartContract.methods.makeMove(currentGameId, move).send( {from: userAccount,value: "0"})
+            var moveFrom = document.getElementById("userInputFrom").value;
+            var moveTo = document.getElementById("userInputTo").value;
+            await smartContract.methods.makeMove(currentGameId, moveFrom, moveTo).send( {from: userAccount,value: "0"})
             .on("receipt", function(receipt) {
                 // do nothing
             })
@@ -747,6 +763,63 @@
                 writeMessageInMessageBox("move failed - it is probably not your turn");
             });
         }
+
+        // todo delete
+        function setExampleGameField(){
+            for (let z=1; z<9;z++) {
+                for (let n=0; n<8;n++) {
+                    const c = ['A','B', 'C', 'D', 'E', 'F', 'G', 'H'];
+                    $(`#field_${z}${c[n]}`).empty()
+                    if((z==1 && n%2 ==0)||(z==2 && n%2 ==1)||(z==3 && n%2 ==0)){
+                        $(`#field_${z}${c[n]}`).append(`<div style="font-size: 1.5vw;">&#9898;</div>`);
+                    }
+                    else if((z==6 && n%2 ==1)||(z==7 && n%2 ==0)||(z==8 && n%2 ==1)){
+                        $(`#field_${z}${c[n]}`).append(`<div style="font-size: 1.5vw;">&#9899;</div>`);
+                    }
+                }
+            }
+        }
+
+        function setExampleChessField(){
+            //white
+            $(`#field_${1}${'A'}`).append(`<div style="font-size: 2vw;">&#9814;</div>`);
+            $(`#field_${1}${'B'}`).append(`<div style="font-size: 2vw;">&#9816;</div>`);
+            $(`#field_${1}${'C'}`).append(`<div style="font-size: 2vw;">&#9815;</div>`);
+            $(`#field_${1}${'D'}`).append(`<div style="font-size: 2vw;">&#9813;</div>`);
+            $(`#field_${1}${'E'}`).append(`<div style="font-size: 2vw;">&#9812;</div>`);
+            $(`#field_${1}${'F'}`).append(`<div style="font-size: 2vw;">&#9815;</div>`);
+            $(`#field_${1}${'G'}`).append(`<div style="font-size: 2vw;">&#9816;</div>`);
+            $(`#field_${1}${'H'}`).append(`<div style="font-size: 2vw;">&#9814;</div>`);
+
+            $(`#field_${2}${'A'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
+            $(`#field_${2}${'B'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
+            $(`#field_${2}${'C'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
+            $(`#field_${2}${'D'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
+            $(`#field_${2}${'E'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
+            $(`#field_${2}${'F'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
+            $(`#field_${2}${'G'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
+            $(`#field_${2}${'H'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
+            //back
+            $(`#field_${8}${'A'}`).append(`<div style="font-size: 2vw;">&#9820;</div>`);
+            $(`#field_${8}${'B'}`).append(`<div style="font-size: 2vw;">&#9822;</div>`);
+            $(`#field_${8}${'C'}`).append(`<div style="font-size: 2vw;">&#9821;</div>`);
+            $(`#field_${8}${'D'}`).append(`<div style="font-size: 2vw;">&#9819;</div>`);
+            $(`#field_${8}${'E'}`).append(`<div style="font-size: 2vw;">&#9818;</div>`);
+            $(`#field_${8}${'F'}`).append(`<div style="font-size: 2vw;">&#9821;</div>`);
+            $(`#field_${8}${'G'}`).append(`<div style="font-size: 2vw;">&#9822;</div>`);
+            $(`#field_${8}${'H'}`).append(`<div style="font-size: 2vw;">&#9820;</div>`);
+
+            $(`#field_${7}${'A'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
+            $(`#field_${7}${'B'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
+            $(`#field_${7}${'C'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
+            $(`#field_${7}${'D'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
+            $(`#field_${7}${'E'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
+            $(`#field_${7}${'F'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
+            $(`#field_${7}${'G'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
+            $(`#field_${7}${'H'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
+        }
+        //setExampleChessField()
+        setExampleGameField()
     </script>
   </body>
 </html>
