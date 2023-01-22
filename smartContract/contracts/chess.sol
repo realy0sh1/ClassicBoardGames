@@ -298,7 +298,7 @@ contract Chess {
         uint8[8][8] storage gF = allGames[_gameId].board;
         uint8 figure = gF[_fromN][_fromC];
         uint8 figureType = figure%10;
-        require(figureType == 4);
+        require(figureType == 3);
         uint8 color = figure-figureType;
         require((color == 10)||(color == 20));
         // valid move
