@@ -756,7 +756,69 @@
             }
             var moveFrom = document.getElementById("userInputFrom").value;
             var moveTo = document.getElementById("userInputTo").value;
-            await smartContract.methods.makeMove(currentGameId, moveFrom, moveTo).send( {from: userAccount,value: "0"})
+            
+            var moveFromN = Number(moveFrom.charAt(0))-1;
+            var moveFromC;
+            var moveToN = Number(moveTo.charAt(0))-1;
+            var moveToC;
+            switch(moveFrom.charAt(1)){
+                case "A":
+                    moveFromC = 0;
+                    break
+                case "B":
+                    moveFromC = 1;
+                    break
+                case "C":
+                    moveFromC = 2;
+                    break
+                case "D":
+                    moveFromC = 3;
+                    break
+                case "E":
+                    moveFromC = 4;
+                    break
+                case "F":
+                    moveFromC = 5;
+                    break
+                case "G":
+                    moveFromC = 6;
+                    break
+                case "H":
+                    moveFromC = 7;
+                    break
+                default:
+                    console.log("Not a valid position");
+            }
+            switch(moveTo.charAt(1)){
+                case "A":
+                    moveToC = 0;
+                    break
+                case "B":
+                    moveToC = 1;
+                    break;
+                case "C":
+                    moveToC = 2;
+                    break;
+                case "D":
+                    moveToC = 3;
+                    break;
+                case "E":
+                    moveToC = 4;
+                    break;
+                case "F":
+                    moveToC = 5;
+                    break;
+                case "G":
+                    moveToC = 6;
+                    break;
+                case "H":
+                    moveToC = 7;
+                    break;
+                default:
+                    console.log("Not a valid position");
+            }
+            console.log(`works till here: ${moveFromN} ${moveFromC} -> ${moveToN} ${moveToC}`)
+            await smartContract.methods.makeMove(currentGameId, moveFromN, moveFromC, moveToN, moveToC).send( {from: userAccount,value: "0"})
             .on("receipt", function(receipt) {
                 // do nothing
             })
@@ -782,45 +844,6 @@
             }
         }
 
-        function setExampleChessField(){
-            //white
-            $(`#field_${1}${'A'}`).append(`<div style="font-size: 2vw;">&#9814;</div>`);
-            $(`#field_${1}${'B'}`).append(`<div style="font-size: 2vw;">&#9816;</div>`);
-            $(`#field_${1}${'C'}`).append(`<div style="font-size: 2vw;">&#9815;</div>`);
-            $(`#field_${1}${'D'}`).append(`<div style="font-size: 2vw;">&#9813;</div>`);
-            $(`#field_${1}${'E'}`).append(`<div style="font-size: 2vw;">&#9812;</div>`);
-            $(`#field_${1}${'F'}`).append(`<div style="font-size: 2vw;">&#9815;</div>`);
-            $(`#field_${1}${'G'}`).append(`<div style="font-size: 2vw;">&#9816;</div>`);
-            $(`#field_${1}${'H'}`).append(`<div style="font-size: 2vw;">&#9814;</div>`);
-
-            $(`#field_${2}${'A'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
-            $(`#field_${2}${'B'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
-            $(`#field_${2}${'C'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
-            $(`#field_${2}${'D'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
-            $(`#field_${2}${'E'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
-            $(`#field_${2}${'F'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
-            $(`#field_${2}${'G'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
-            $(`#field_${2}${'H'}`).append(`<div style="font-size: 2vw;">&#9817;</div>`);
-            //back
-            $(`#field_${8}${'A'}`).append(`<div style="font-size: 2vw;">&#9820;</div>`);
-            $(`#field_${8}${'B'}`).append(`<div style="font-size: 2vw;">&#9822;</div>`);
-            $(`#field_${8}${'C'}`).append(`<div style="font-size: 2vw;">&#9821;</div>`);
-            $(`#field_${8}${'D'}`).append(`<div style="font-size: 2vw;">&#9819;</div>`);
-            $(`#field_${8}${'E'}`).append(`<div style="font-size: 2vw;">&#9818;</div>`);
-            $(`#field_${8}${'F'}`).append(`<div style="font-size: 2vw;">&#9821;</div>`);
-            $(`#field_${8}${'G'}`).append(`<div style="font-size: 2vw;">&#9822;</div>`);
-            $(`#field_${8}${'H'}`).append(`<div style="font-size: 2vw;">&#9820;</div>`);
-
-            $(`#field_${7}${'A'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
-            $(`#field_${7}${'B'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
-            $(`#field_${7}${'C'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
-            $(`#field_${7}${'D'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
-            $(`#field_${7}${'E'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
-            $(`#field_${7}${'F'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
-            $(`#field_${7}${'G'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
-            $(`#field_${7}${'H'}`).append(`<div style="font-size: 2vw;">&#9823;</div>`);
-        }
-        //setExampleChessField()
         setExampleGameField()
     </script>
   </body>
