@@ -26,7 +26,7 @@ contract Chess {
     // list of all registered players
     address[] public allPlayer;
     // all ticTacToe games ever played
-    TicTacToeGame[] public allGames;
+    ChessGame[] public allGames;
 
     event NewPlayerAdded();
     event NewMatchCreated(address indexed _player1, address indexed _player2);  
@@ -86,17 +86,19 @@ contract Chess {
         // X4 Läufer
         // X5 Dame
         // X6 König
-        gameId = allGames.push( TicTacToeGame([[12,13,14,15,16,14,13,12],[11,11,11,11,11,11,11,11],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[21,21,21,21,21,21,21,21],[22,23,24,25,26,24,23,22]], msg.sender, _player2, msg.sender, address(0), false, coinsPerGame.mul(2)) ).sub(1);
+        gameId = allGames.push( ChessGame([[12,13,14,15,16,14,13,12],[11,11,11,11,11,11,11,11],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[21,21,21,21,21,21,21,21],[22,23,24,25,26,24,23,22]], msg.sender, _player2, msg.sender, address(0), false, coinsPerGame.mul(2)) ).sub(1);
         // emit event
         emit NewMatchCreated(msg.sender, _player2);
         // return gameId (position in array for new game)
         return gameId;
     }
 
-    function makeMove(uint _gameId, uint8 _posFrom, uint8 _posTo) external {
+    function makeMove(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) external {
         // check input
-        require(_posFrom < 8);
-        require(_posTo < 8);
+        require(_fromN < 8);
+        require(_fromC < 8);
+        require(_toN < 8);
+        require(_toC < 8);
         require(_gameId < allGames.length);
         // check that game is not finished
         require(allGames[_gameId].finished == false);
@@ -104,9 +106,6 @@ contract Chess {
         address currentPlayer = allGames[_gameId].activePlayer;
         // check that sender is current player
         require(msg.sender == currentPlayer);
-
-
-
         // set marker for game field
         uint8 marker;
         uint8 markerOfNextPlayer;
@@ -120,14 +119,10 @@ contract Chess {
             markerOfNextPlayer = 10;
             nextPlayer = allGames[_gameId].player1;
         }
-
-
-        // todo check if move is possible
-
-        // todo make move
-
-        // todo player wins when no more moves possible
-
+        // check if move is possible
+        checkIfMovePosible(_gameId, _fromN, _fromC, _toN, _toC, marker, markerOfNextPlayer);
+        // make move
+        executeMove(_gameId, _fromN, _fromC, _toN, _toC);
         // check for winner
         if(currentPlayerWon(_gameId, marker)){
             allGames[_gameId].finished = true;
@@ -139,6 +134,7 @@ contract Chess {
             emit GameFinished(_gameId, currentPlayer);
 
         } else if (isDraw(_gameId)) {
+            // only draw if two kings left. The case that a player cannot do any valid move is not implemented
             // game ended, draw => return coins to players
             allGames[_gameId].finished = true;
             // winner remians address(0)
@@ -157,10 +153,80 @@ contract Chess {
         }
     }
 
+    function checkIfMovePosible(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC, uint8 _currentPlayer, uint8 _nextPlayer) internal view returns(bool){
+        uint8[8][8] storage gF = allGames[_gameId].board;
+        uint8 figure = gF[_fromN][_fromC];
+        uint8 figureType = figure%10;
+        // check that there is a figure
+        require(figure !=0);
+        // check that the correct colour is moved
+        require((figure-(figureType)) == _currentPlayer);
+        // check is movement is possible
+        if((figureType)==1){
+            // Bauer
+            return checkMovePawn(_gameId, _fromN, _fromC, _toN, _toC);
+        }else if((figureType)==2){
+            // Turm
+            return checkMoveRook(_gameId, _fromN, _fromC, _toN, _toC);
+        }else if((figureType)==3){
+            // Pferd
+            return checkMoveKnight(_gameId, _fromN, _fromC, _toN, _toC);
+        }else if((figureType)==4){
+            // Läufer
+            return checkMoveBishop(_gameId, _fromN, _fromC, _toN, _toC);
+        }else if((figureType)==5){
+            // Dame
+            return checkMoveQueen(_gameId, _fromN, _fromC, _toN, _toC);
+        }else if((figureType)==6){
+            // König
+            return checkMoveKing(_gameId, _fromN, _fromC, _toN, _toC);
+        }else{
+            // cannot happen, abord
+            require(1==0);
+        }
+        return false;
+    }
+
+    function executeMove(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal{
+        uint8[8][8] storage gF = allGames[_gameId].board;
+        uint8 figure = gF[_fromN][_fromC];
+        //move from
+        gF[_fromN][_fromC] = 0;
+        // move to
+        gF[_toN][_toC] = figure;
+    }
+
+    function checkMovePawn(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal view returns(bool){
+        uint8[8][8] storage gF = allGames[_gameId].board;
+        return true;
+    }
+
+    function checkMoveRook(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal view returns(bool){
+        return true;
+    }   
+
+    function checkMoveKnight(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal view returns(bool){
+        return true;
+    }   
+
+    function checkMoveBishop(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal view returns(bool){
+        return true;
+    }   
+
+    function checkMoveQueen(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal view returns(bool){
+        return true;
+    }   
+
+    function checkMoveKing(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal view returns(bool){
+        return true;
+    }    
+
+
+
     function currentPlayerWon(uint _gameId, uint8 _m) internal view returns(bool) {
         // _m is marker of current player (10 white and 20 black)
         // storage means pointer to that
-        uint8[9] storage gF = allGames[_gameId].board;
+        uint8[8][8] storage gF = allGames[_gameId].board;
         // player 10 wins if 26 (black king is not there anymore)
         // player 20 wins if 16 (white king is not there anymore)
         for (uint i=0; i<8; i++) {
@@ -176,9 +242,16 @@ contract Chess {
     }
 
     function isDraw(uint _gameId) internal view returns(bool){
-        uint8[9] storage gF = allGames[_gameId].board;
+        uint8[8][8] storage gF = allGames[_gameId].board;
         // only two kings left
-        // todo
-        return false;
+        for (uint i=0; i<8; i++) {
+            for (uint j=0; j<8; j++) {
+                if((gF[i][j]!=0)&&(gF[i][j]!=26)&&(gF[i][j]!=16)){
+                    // not empty and not a king => other 
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
