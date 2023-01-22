@@ -161,6 +161,8 @@ contract Chess {
         require(figure !=0);
         // check that the correct colour is moved
         require((figure-(figureType)) == _currentPlayer);
+        // check that figure move
+        require(!((_fromN == _toN) && (_fromC == _toC)));
         // check is movement is possible
         if((figureType)==1){
             // Bauer
@@ -198,26 +200,314 @@ contract Chess {
 
     function checkMovePawn(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal view returns(bool){
         uint8[8][8] storage gF = allGames[_gameId].board;
+        uint8 figure = gF[_fromN][_fromC];
+        uint8 figureType = figure%10;
+        require(figureType == 1);
+        uint8 color = figure-figureType;
+        require((color == 10)||(color == 20));
+        if(color == 10){
+            if(_fromC == _toC){
+                // nobody is at destination
+                require(gF[_toN][_toC] == 0);
+                // +1 or +2 
+                require((_fromN+1 == _toN)||((_fromN+2 == _toN) && (_fromN == 1) && (gF[_fromN+1][_fromC] == 0)));
+            } else if(_fromN+1 == _toN){
+                if((_fromC+1==_toC)||(_fromC-1==_toC)){
+                    // other player is on the destination field
+                    require((gF[_toN][_toC]-(gF[_toN][_toC]%10))==20);
+                } else{
+                    // move not allowed
+                    require(1==0);
+                }
+            } else{
+                // move not allowed
+                require(1==0);
+            }
+        }else{
+            if(_fromC == _toC){
+                // nobody is at destination
+                require(gF[_toN][_toC] == 0);
+                // +1 or +2 
+                require((_fromN-1 == _toN)||((_fromN-2 == _toN) && (_fromN == 6) && (gF[_fromN-1][_fromC] == 0)));
+            } else if(_fromN-1 == _toN){
+                if((_fromC+1==_toC)||(_fromC-1==_toC)){
+                    // other player is on the destination field
+                    require((gF[_toN][_toC]-(gF[_toN][_toC]%10))==10);
+                } else{
+                    // move not allowed
+                    require(1==0);
+                }
+            } else{
+                // move not allowed
+                require(1==0);
+            }
+        }
         return true;
     }
 
     function checkMoveRook(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal view returns(bool){
+        uint8[8][8] storage gF = allGames[_gameId].board;
+        uint8 figure = gF[_fromN][_fromC];
+        uint8 figureType = figure%10;
+        require(figureType == 2);
+        uint8 color = figure-figureType;
+        require((color == 10)||(color == 20));
+        // valid move
+        require( (_fromN == _toN)||(_fromC == _toC) );
+        // check that no other figure on way (excluding start and destination)
+        uint8 startPos;
+        uint8 destPos;
+        if((_fromC == _toC)&&(_fromN > _toN)) {
+            // case 1 move down
+            startPos = _fromN-1;
+            destPos = _toN;
+            for(startPos;startPos>destPos; startPos--){
+                require(gF[startPos][_fromC]==0);
+            }
+        } else if((_fromC == _toC)&&(_fromN < _toN)) {
+            // case 2 move up
+            startPos = _fromN+1;
+            destPos = _toN;
+            for(startPos;startPos<destPos; startPos++){
+                require(gF[startPos][_fromC]==0);
+            }
+        } else if((_fromN == _toN)&&(_fromC < _toC)) {
+            // case 3 move right
+            startPos = _fromC+1;
+            destPos = _toC;
+            for(startPos;startPos<destPos; startPos++){
+                require(gF[_fromN][startPos]==0);
+            }
+        } else if((_fromN == _toN)&&(_fromC > _toC)) {
+            // case4 move left
+            startPos = _fromC-1;
+            destPos = _toC;
+            for(startPos;startPos>destPos; startPos--){
+                require(gF[_fromN][startPos]==0);
+            }
+        }else{
+            // not valid
+            require(1==0);
+        }
+        // assure that not own figure is on distination
+        require((gF[_toN][_toC]-(gF[_toN][_toC]%10)) != color);
         return true;
     }   
 
     function checkMoveKnight(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal view returns(bool){
+        uint8[8][8] storage gF = allGames[_gameId].board;
+        uint8 figure = gF[_fromN][_fromC];
+        uint8 figureType = figure%10;
+        require(figureType == 4);
+        uint8 color = figure-figureType;
+        require((color == 10)||(color == 20));
+        // valid move
+        require(( (_fromC-1==_toC) && (_fromN+2 == _toN) )||
+                ( (_fromC+1==_toC) && (_fromN+2 == _toN) )||
+                ( (_fromC+2==_toC) && (_fromN+1 == _toN) )||
+                ( (_fromC+2==_toC) && (_fromN-1 == _toN) )||
+                ( (_fromC+1==_toC) && (_fromN-2 == _toN) )||
+                ( (_fromC-1==_toC) && (_fromN-2 == _toN) )||
+                ( (_fromC-2==_toC) && (_fromN+1 == _toN) )||
+                ( (_fromC-2==_toC) && (_fromN-1 == _toN) )
+        );  
+        // assure that not own figure is on distination
+        require((gF[_toN][_toC]-(gF[_toN][_toC]%10)) != color);
         return true;
     }   
 
     function checkMoveBishop(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal view returns(bool){
+        uint8[8][8] storage gF = allGames[_gameId].board;
+        uint8 figure = gF[_fromN][_fromC];
+        uint8 figureType = figure%10;
+        require(figureType == 4);
+        uint8 color = figure-figureType;
+        require((color == 10)||(color == 20));
+
+        uint8 startPosN;
+        uint8 startPosC;
+        uint8 destPos;
+        // check that no other figure on way (excluding start and destination)
+        if((_fromN < _toN) && (_fromC < _toC)){
+            // case 1: move to top right
+            // valid diagonal
+            require((_toN-_fromN) == (_toC-_fromC));
+            // no figures in between
+            startPosN = _fromN+1;
+            startPosC = _fromC+1;
+            destPos = _toN;
+            for(startPosN;startPosN<destPos; startPosN++){
+                require(gF[startPosN][startPosC]==0);
+                startPosC+1;
+            }
+        }else if((_fromN < _toN) && (_fromC > _toC)){
+            // case 2: move to top left
+            // valid diagonal
+            require((_toN-_fromN) == (_fromC-_toC));
+            // no figures in between
+            startPosN = _fromN+1;
+            startPosC = _fromC+1;
+            destPos = _toN;
+            for(startPosN;startPosN<destPos; startPosN++){
+                require(gF[startPosN][startPosC]==0);
+                startPosC-1;
+            }
+        }else if((_fromN > _toN) && (_fromC < _toC)){
+            // case 3: move to botton right
+            // valid diagonal
+            require((_fromN-_toN) == (_toC-_fromC));
+            // no figures in between
+            startPosN = _fromN-1;
+            startPosC = _fromC+1;
+            destPos = _toN;
+            for(startPosN;startPosN>destPos; startPosN--){
+                require(gF[startPosN][startPosC]==0);
+                startPosC+1;
+            }
+        }else if( (_fromN > _toN) && (_fromC > _toC) ){
+            // case4: move to botton left
+            // valid diagonal
+            require((_fromN-_toN) == (_fromC-_toC));
+            // no figures in between
+            startPosN = _fromN-1;
+            startPosC = _fromC-1;
+            destPos = _toN;
+            for(startPosN;startPosN>destPos; startPosN--){
+                require(gF[startPosN][startPosC]==0);
+                startPosC-1;
+            }
+        }else{
+            // invalid move
+            require(1==0);
+        }
+        // assure that not own figure is on distination
+        require((gF[_toN][_toC]-(gF[_toN][_toC]%10)) != color);
         return true;
     }   
 
     function checkMoveQueen(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal view returns(bool){
+        // combine bishop and rook
+        uint8[8][8] storage gF = allGames[_gameId].board;
+        uint8 figure = gF[_fromN][_fromC];
+        uint8 figureType = figure%10;
+        require(figureType == 5);
+        uint8 color = figure-figureType;
+        require((color == 10)||(color == 20));
+
+        uint8 startPos;
+        uint8 destPos;
+        uint8 startPosN;
+        uint8 startPosC;
+        if( (_fromN == _toN)||(_fromC == _toC) ){
+            // check as is rook
+            // check that no other figure on way (excluding start and destination)
+            if((_fromC == _toC)&&(_fromN > _toN)) {
+                // case 1 move down
+                startPos = _fromN-1;
+                destPos = _toN;
+                for(startPos;startPos>destPos; startPos--){
+                    require(gF[startPos][_fromC]==0);
+                }
+            } else if((_fromC == _toC)&&(_fromN < _toN)) {
+                // case 2 move up
+                startPos = _fromN+1;
+                destPos = _toN;
+                for(startPos;startPos<destPos; startPos++){
+                    require(gF[startPos][_fromC]==0);
+                }
+            } else if((_fromN == _toN)&&(_fromC < _toC)) {
+                // case 3 move right
+                startPos = _fromC+1;
+                destPos = _toC;
+                for(startPos;startPos<destPos; startPos++){
+                    require(gF[_fromN][startPos]==0);
+                }
+            } else if((_fromN == _toN)&&(_fromC > _toC)) {
+                // case4 move left
+                startPos = _fromC-1;
+                destPos = _toC;
+                for(startPos;startPos>destPos; startPos--){
+                    require(gF[_fromN][startPos]==0);
+                }
+            }else{
+                // not valid
+                require(1==0);
+            }
+        } else {
+            // check as if bishop
+            // check that no other figure on way (excluding start and destination)
+            if((_fromN < _toN) && (_fromC < _toC)){
+                // case 1: move to top right
+                // valid diagonal
+                require((_toN-_fromN) == (_toC-_fromC));
+                // no figures in between
+                startPosN = _fromN+1;
+                startPosC = _fromC+1;
+                destPos = _toN;
+                for(startPosN;startPosN<destPos; startPosN++){
+                    require(gF[startPosN][startPosC]==0);
+                    startPosC+1;
+                }
+            }else if((_fromN < _toN) && (_fromC > _toC)){
+                // case 2: move to top left
+                // valid diagonal
+                require((_toN-_fromN) == (_fromC-_toC));
+                // no figures in between
+                startPosN = _fromN+1;
+                startPosC = _fromC-1;
+                destPos = _toN;
+                for(startPosN;startPosN<destPos; startPosN++){
+                    require(gF[startPosN][startPosC]==0);
+                    startPosC-1;
+                }
+            }else if((_fromN > _toN) && (_fromC < _toC)){
+                // case 3: move to botton right
+                // valid diagonal
+                require((_fromN-_toN) == (_toC-_fromC));
+                // no figures in between
+                startPosN = _fromN-1;
+                startPosC = _fromC+1;
+                destPos = _toN;
+                for(startPosN;startPosN>destPos; startPosN--){
+                    require(gF[startPosN][startPosC]==0);
+                    startPosC+1;
+                }
+            }else if( (_fromN > _toN) && (_fromC > _toC) ){
+                // case4: move to botton left
+                // valid diagonal
+                require((_fromN-_toN) == (_fromC-_toC));
+                // no figures in between
+                startPosN = _fromN-1;
+                startPosC = _fromC-1;
+                destPos = _toN;
+                for(startPosN;startPosN>destPos; startPosN--){
+                    require(gF[startPosN][startPosC]==0);
+                    startPosC-1;
+                }
+            }else{
+                // invalid move
+                require(1==0);
+            }
+        }
+        // assure that not own figure is on distination
+        require((gF[_toN][_toC]-(gF[_toN][_toC]%10)) != color);
         return true;
     }   
 
     function checkMoveKing(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal view returns(bool){
+        uint8[8][8] storage gF = allGames[_gameId].board;
+        uint8 figure = gF[_fromN][_fromC];
+        uint8 figureType = figure%10;
+        require(figureType == 6);
+        uint8 color = figure-figureType;
+        require((color == 10)||(color == 20));
+        // valid move
+        require(    ((_fromC == _toC)&&( (_fromN+1 == _toN) || (_fromN-1 == _toN) ))||
+                    ((_fromN == _toN)&&( (_fromC+1 == _toC) || (_fromC-1 == _toC) ))||
+                    ((_fromN+1 == _toN)&&((_fromC+1 == _toC) || (_fromC-1 == _toC)))||
+                    ((_fromN-1 == _toN)&&((_fromC+1 == _toC) || (_fromC-1 == _toC)))
+                );
+        require((gF[_toN][_toC]-(gF[_toN][_toC]%10)) != color);
         return true;
     }    
 
