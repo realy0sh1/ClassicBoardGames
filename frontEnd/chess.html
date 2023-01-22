@@ -806,8 +806,69 @@
             }
             var moveFrom = document.getElementById("userInputFrom").value;
             var moveTo = document.getElementById("userInputTo").value;
-            console.log(`works till here: moveFrom: ${moveFrom} moveTo ${moveTo}`)
-            await smartContract.methods.makeMove(currentGameId, Array.from(moveFrom)[0], Array.from(moveFrom)[1], Array.from(moveTo)[0], Array.from(moveTo)[1]).send( {from: userAccount,value: "0"})
+            
+            var moveFromN = Number(moveFrom.charAt(0))-1;
+            var moveFromC;
+            var moveToN = Number(moveTo.charAt(0))-1;
+            var moveToC;
+            switch(moveFrom.charAt(1)){
+                case "A":
+                    moveFromC = 0;
+                    break
+                case "B":
+                    moveFromC = 1;
+                    break
+                case "C":
+                    moveFromC = 2;
+                    break
+                case "D":
+                    moveFromC = 3;
+                    break
+                case "E":
+                    moveFromC = 4;
+                    break
+                case "F":
+                    moveFromC = 5;
+                    break
+                case "G":
+                    moveFromC = 6;
+                    break
+                case "H":
+                    moveFromC = 7;
+                    break
+                default:
+                    console.log("Not a valid position");
+            }
+            switch(moveTo.charAt(1)){
+                case "A":
+                    moveToC = 0;
+                    break
+                case "B":
+                    moveToC = 1;
+                    break;
+                case "C":
+                    moveToC = 2;
+                    break;
+                case "D":
+                    moveToC = 3;
+                    break;
+                case "E":
+                    moveToC = 4;
+                    break;
+                case "F":
+                    moveToC = 5;
+                    break;
+                case "G":
+                    moveToC = 6;
+                    break;
+                case "H":
+                    moveToC = 7;
+                    break;
+                default:
+                    console.log("Not a valid position");
+            }
+            console.log(`works till here: ${moveFromN} ${moveFromC} -> ${moveToN} ${moveToC}`)
+            await smartContract.methods.makeMove(currentGameId, moveFromN, moveFromC, moveToN, moveToC).send( {from: userAccount,value: "0"})
             .on("receipt", function(receipt) {
                 // do nothing
             })
