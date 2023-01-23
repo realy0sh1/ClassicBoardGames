@@ -590,12 +590,12 @@
             var draws = 0;
             var losses = 0;
             for (let i=0; i< arrayLength; i++) {
-                let ticTacToeGameStruct = await smartContract.methods.allGames(i).call();
-                if((_address == ticTacToeGameStruct["player1"] || _address == ticTacToeGameStruct["player2"]) && (ticTacToeGameStruct["finished"])) {
+                let chessGameStruct = await smartContract.methods.allGames(i).call();
+                if((_address == chessGameStruct["player1"] || _address == chessGameStruct["player2"]) && (chessGameStruct["finished"])) {
                     totalGames++;
-                    if(ticTacToeGameStruct["winner"] == "0x0000000000000000000000000000000000000000") {
+                    if(chessGameStruct["winner"] == "0x0000000000000000000000000000000000000000") {
                         draws++;
-                    } else if(ticTacToeGameStruct["winner"] == _address){
+                    } else if(chessGameStruct["winner"] == _address){
                         wins++;
                     } else {
                         losses++;
@@ -660,13 +660,13 @@
             $("#allActiveGames").empty();
             for (let i=0; i< arrayLength; i++) {
                 // get player's address
-                let ticTacToeGameStruct = await smartContract.methods.allGames(i).call();
-                if((_address == ticTacToeGameStruct["player1"] || _address == ticTacToeGameStruct["player2"]) && !(ticTacToeGameStruct["finished"])) {
+                let chessGameStruct = await smartContract.methods.allGames(i).call();
+                if((_address == chessGameStruct["player1"] || _address == chessGameStruct["player2"]) && !(chessGameStruct["finished"])) {
                     var opponent;
-                    if(_address == ticTacToeGameStruct["player1"]){
-                        opponent = ticTacToeGameStruct["player2"];
+                    if(_address == chessGameStruct["player1"]){
+                        opponent = chessGameStruct["player2"];
                     } else {
-                        opponent = ticTacToeGameStruct["player1"];
+                        opponent = chessGameStruct["player1"];
                     }
                     $("#allActiveGames").append(
                     `<h1 style="font-size: 1.5vh;color: darkolivegreen;" onclick="loadGame('${i}')">${opponent}</h1>`
@@ -680,20 +680,20 @@
                 clearGameField();
                 return;
             }
-            let ticTacToeGameStruct = await smartContract.methods.getBoard(_gameId).call();
+            let chessGameStruct = await smartContract.methods.getBoard(_gameId).call();
 
             for (let z=1; z<9;z++) {
                 for (let n=0; n<8;n++) {
                     const c = ['A','B', 'C', 'D', 'E', 'F', 'G', 'H'];
-                    marker = ticTacToeGameStruct[z-1][n];
+                    marker = chessGameStruct[z-1][n];
                     // 1X means player 1 (WHITE)
                     // 2X means player 2 (BLACK)
-                    // X1 Bauer
-                    // X2 Turm
-                    // X3 Pferd
-                    // X4 Läufer
-                    // X5 Dame
-                    // X6 König
+                    // X1 pawn
+                    // X2 rook
+                    // X3 knight
+                    // X4 bishop
+                    // X5 queen
+                    // X6 king
                     switch(marker) {
                     case "11":
                         sign = "&#9817;";
@@ -747,7 +747,6 @@
                 for (let n=0; n<8;n++) {
                     const c = ['A','B', 'C', 'D', 'E', 'F', 'G', 'H'];
                     $(`#field_${z+1}${c[n]}`).empty()
-                    console.log(`cleared field: ${z+1}${c[n]}`);
                 }
             }
         }
@@ -771,10 +770,10 @@
         
         async function loadGame(_gameId) {
             currentGameId = _gameId;
-            let ticTacToeGameStruct = await smartContract.methods.allGames(_gameId).call();
-            nextPlayer = ticTacToeGameStruct['activePlayer'];
-            player1 = ticTacToeGameStruct['player1'];
-            player2 = ticTacToeGameStruct['player2'];
+            let chessGameStruct = await smartContract.methods.allGames(_gameId).call();
+            nextPlayer = chessGameStruct['activePlayer'];
+            player1 = chessGameStruct['player1'];
+            player2 = chessGameStruct['player2'];
             if(userAccount == nextPlayer){
                 // it is this players turn
                 if(userAccount == player1){
@@ -867,7 +866,6 @@
                 default:
                     console.log("Not a valid position");
             }
-            console.log(`works till here: ${moveFromN} ${moveFromC} -> ${moveToN} ${moveToC}`)
             await smartContract.methods.makeMove(currentGameId, moveFromN, moveFromC, moveToN, moveToC).send( {from: userAccount,value: "0"})
             .on("receipt", function(receipt) {
                 // do nothing
