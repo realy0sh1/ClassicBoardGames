@@ -180,7 +180,7 @@
     </div>
     <!-- contract details  -->
     <script>
-        var smartContractAddress = "0x8baFb86f63d953A6bF3bf9e57140957a83C6F7D9";
+        var smartContractAddress = "0xCBBc25B55afECC4d164fA41389942B45B508B8de";
         var smartContractABI = [
             {
                 "constant": false,
@@ -199,7 +199,19 @@
                         "type": "uint256"
                     },
                     {
-                        "name": "_pos",
+                        "name": "_fromN",
+                        "type": "uint8"
+                    },
+                    {
+                        "name": "_fromC",
+                        "type": "uint8"
+                    },
+                    {
+                        "name": "_toN",
+                        "type": "uint8"
+                    },
+                    {
+                        "name": "_toC",
                         "type": "uint8"
                     }
                 ],
@@ -374,7 +386,7 @@
                 "outputs": [
                     {
                         "name": "",
-                        "type": "uint8[9]"
+                        "type": "uint8[8][8]"
                     }
                 ],
                 "payable": false,
@@ -578,12 +590,12 @@
             var draws = 0;
             var losses = 0;
             for (let i=0; i< arrayLength; i++) {
-                let ticTacToeGameStruct = await smartContract.methods.allGames(i).call();
-                if((_address == ticTacToeGameStruct["player1"] || _address == ticTacToeGameStruct["player2"]) && (ticTacToeGameStruct["finished"])) {
+                let checkersGameStruct = await smartContract.methods.allGames(i).call();
+                if((_address == checkersGameStruct["player1"] || _address == checkersGameStruct["player2"]) && (checkersGameStruct["finished"])) {
                     totalGames++;
-                    if(ticTacToeGameStruct["winner"] == "0x0000000000000000000000000000000000000000") {
+                    if(checkersGameStruct["winner"] == "0x0000000000000000000000000000000000000000") {
                         draws++;
-                    } else if(ticTacToeGameStruct["winner"] == _address){
+                    } else if(checkersGameStruct["winner"] == _address){
                         wins++;
                     } else {
                         losses++;
@@ -648,13 +660,13 @@
             $("#allActiveGames").empty();
             for (let i=0; i< arrayLength; i++) {
                 // get player's address
-                let ticTacToeGameStruct = await smartContract.methods.allGames(i).call();
-                if((_address == ticTacToeGameStruct["player1"] || _address == ticTacToeGameStruct["player2"]) && !(ticTacToeGameStruct["finished"])) {
+                let checkersGameStruct = await smartContract.methods.allGames(i).call();
+                if((_address == checkersGameStruct["player1"] || _address == checkersGameStruct["player2"]) && !(checkersGameStruct["finished"])) {
                     var opponent;
-                    if(_address == ticTacToeGameStruct["player1"]){
-                        opponent = ticTacToeGameStruct["player2"];
+                    if(_address == checkersGameStruct["player1"]){
+                        opponent = checkersGameStruct["player2"];
                     } else {
-                        opponent = ticTacToeGameStruct["player1"];
+                        opponent = checkersGameStruct["player1"];
                     }
                     $("#allActiveGames").append(
                     `<h1 style="font-size: 1.5vh;color: darkolivegreen;" onclick="loadGame('${i}')">${opponent}</h1>`
@@ -668,12 +680,12 @@
                 clearGameField();
                 return;
             }
-            let ticTacToeGameStruct = await smartContract.methods.getBoard(_gameId).call();
-
+            let checkersGameStruct = await smartContract.methods.getBoard(_gameId).call();
+            console.log(checkersGameStruct);
             for (let z=1; z<9;z++) {
                 for (let n=0; n<8;n++) {
                     const c = ['A','B', 'C', 'D', 'E', 'F', 'G', 'H'];
-                    marker = ticTacToeGameStruct[z-1][n];
+                    marker = checkersGameStruct[z-1][n];
                     
                     switch(marker) {
                     case "1":
@@ -721,10 +733,10 @@
         
         async function loadGame(_gameId) {
             currentGameId = _gameId;
-            let ticTacToeGameStruct = await smartContract.methods.allGames(_gameId).call();
-            nextPlayer = ticTacToeGameStruct['activePlayer'];
-            player1 = ticTacToeGameStruct['player1'];
-            player2 = ticTacToeGameStruct['player2'];
+            let checkersGameStruct = await smartContract.methods.allGames(_gameId).call();
+            nextPlayer = checkersGameStruct['activePlayer'];
+            player1 = checkersGameStruct['player1'];
+            player2 = checkersGameStruct['player2'];
             if(userAccount == nextPlayer){
                 // it is this players turn
                 if(userAccount == player1){
@@ -827,24 +839,6 @@
                 writeMessageInMessageBox("move failed - it is probably not your turn");
             });
         }
-
-        // todo delete
-        function setExampleGameField(){
-            for (let z=1; z<9;z++) {
-                for (let n=0; n<8;n++) {
-                    const c = ['A','B', 'C', 'D', 'E', 'F', 'G', 'H'];
-                    $(`#field_${z}${c[n]}`).empty()
-                    if((z==1 && n%2 ==0)||(z==2 && n%2 ==1)||(z==3 && n%2 ==0)){
-                        $(`#field_${z}${c[n]}`).append(`<div style="font-size: 1.5vw;">&#9898;</div>`);
-                    }
-                    else if((z==6 && n%2 ==1)||(z==7 && n%2 ==0)||(z==8 && n%2 ==1)){
-                        $(`#field_${z}${c[n]}`).append(`<div style="font-size: 1.5vw;">&#9899;</div>`);
-                    }
-                }
-            }
-        }
-
-        setExampleGameField()
     </script>
   </body>
 </html>
