@@ -446,7 +446,7 @@ contract Chess {
                 destPos = _toN;
                 for(startPosN;startPosN<destPos; startPosN++){
                     require(gF[startPosN][startPosC]==0);
-                    startPosC+1;
+                    startPosC = startPosC+1;
                 }
             }else if((_fromN < _toN) && (_fromC > _toC)){
                 // case 2: move to top left
@@ -458,7 +458,7 @@ contract Chess {
                 destPos = _toN;
                 for(startPosN;startPosN<destPos; startPosN++){
                     require(gF[startPosN][startPosC]==0);
-                    startPosC-1;
+                    startPosC = startPosC-1;
                 }
             }else if((_fromN > _toN) && (_fromC < _toC)){
                 // case 3: move to botton right
@@ -470,7 +470,7 @@ contract Chess {
                 destPos = _toN;
                 for(startPosN;startPosN>destPos; startPosN--){
                     require(gF[startPosN][startPosC]==0);
-                    startPosC+1;
+                    startPosC = startPosC+1;
                 }
             }else if( (_fromN > _toN) && (_fromC > _toC) ){
                 // case4: move to botton left
@@ -482,7 +482,7 @@ contract Chess {
                 destPos = _toN;
                 for(startPosN;startPosN>destPos; startPosN--){
                     require(gF[startPosN][startPosC]==0);
-                    startPosC-1;
+                    startPosC = startPosC-1;
                 }
             }else{
                 // invalid move

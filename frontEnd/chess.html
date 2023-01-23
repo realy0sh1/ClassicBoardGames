@@ -180,7 +180,7 @@
     </div>
     <!-- contract details  -->
     <script>
-        var smartContractAddress = "0xD033DB1b838A426c2aD5906895D7d24C1a61E2E2";
+        var smartContractAddress = "0x08465aa651087B2232763f00B29529C205b82C0D";
         var smartContractABI = [
 	{
 		"constant": false,
@@ -464,7 +464,7 @@
     <script>
         var currentGameId;
 
-        async function startCheckersDapp() {
+        async function startChessDapp() {
             var values = await getBothWeb3();
             const web3 = values[0];
             const web3Event = values[1];
@@ -557,7 +557,7 @@
             }).on("error", console.error);
             
         }
-        startCheckersDapp();
+        startChessDapp();
 
         function writeMessageInMessageBox(_message) {
             document.getElementById("messageBox").innerHTML = `| ${_message} |`;
