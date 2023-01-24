@@ -180,248 +180,248 @@
     </div>
     <!-- contract details  -->
     <script>
-        var smartContractAddress = "0xCBBc25B55afECC4d164fA41389942B45B508B8de";
+        var smartContractAddress = "0x7C7dbd13D381fC40bE037cE7eFd7656d8849187B";
         var smartContractABI = [
-            {
-                "constant": false,
-                "inputs": [],
-                "name": "depositEtherForCoins",
-                "outputs": [],
-                "payable": true,
-                "stateMutability": "payable",
-                "type": "function"
-            },
-            {
-                "constant": false,
-                "inputs": [
-                    {
-                        "name": "_gameId",
-                        "type": "uint256"
-                    },
-                    {
-                        "name": "_fromN",
-                        "type": "uint8"
-                    },
-                    {
-                        "name": "_fromC",
-                        "type": "uint8"
-                    },
-                    {
-                        "name": "_toN",
-                        "type": "uint8"
-                    },
-                    {
-                        "name": "_toC",
-                        "type": "uint8"
-                    }
-                ],
-                "name": "makeMove",
-                "outputs": [],
-                "payable": false,
-                "stateMutability": "nonpayable",
-                "type": "function"
-            },
-            {
-                "constant": false,
-                "inputs": [
-                    {
-                        "name": "_player2",
-                        "type": "address"
-                    }
-                ],
-                "name": "startNewGame",
-                "outputs": [
-                    {
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "payable": false,
-                "stateMutability": "nonpayable",
-                "type": "function"
-            },
-            {
-                "anonymous": false,
-                "inputs": [],
-                "name": "NewPlayerAdded",
-                "type": "event"
-            },
-            {
-                "anonymous": false,
-                "inputs": [
-                    {
-                        "indexed": true,
-                        "name": "_player1",
-                        "type": "address"
-                    },
-                    {
-                        "indexed": true,
-                        "name": "_player2",
-                        "type": "address"
-                    }
-                ],
-                "name": "NewMatchCreated",
-                "type": "event"
-            },
-            {
-                "anonymous": false,
-                "inputs": [
-                    {
-                        "indexed": true,
-                        "name": "_gameId",
-                        "type": "uint256"
-                    },
-                    {
-                        "indexed": true,
-                        "name": "_nextPlayer",
-                        "type": "address"
-                    }
-                ],
-                "name": "GameFieldChanged",
-                "type": "event"
-            },
-            {
-                "anonymous": false,
-                "inputs": [
-                    {
-                        "indexed": true,
-                        "name": "_gameId",
-                        "type": "uint256"
-                    },
-                    {
-                        "indexed": true,
-                        "name": "_winner",
-                        "type": "address"
-                    }
-                ],
-                "name": "GameFinished",
-                "type": "event"
-            },
-            {
-                "constant": true,
-                "inputs": [
-                    {
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "allGames",
-                "outputs": [
-                    {
-                        "name": "player1",
-                        "type": "address"
-                    },
-                    {
-                        "name": "player2",
-                        "type": "address"
-                    },
-                    {
-                        "name": "activePlayer",
-                        "type": "address"
-                    },
-                    {
-                        "name": "winner",
-                        "type": "address"
-                    },
-                    {
-                        "name": "finished",
-                        "type": "bool"
-                    },
-                    {
-                        "name": "coinPrize",
-                        "type": "uint256"
-                    }
-                ],
-                "payable": false,
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "constant": true,
-                "inputs": [
-                    {
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "allPlayer",
-                "outputs": [
-                    {
-                        "name": "",
-                        "type": "address"
-                    }
-                ],
-                "payable": false,
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "constant": true,
-                "inputs": [
-                    {
-                        "name": "",
-                        "type": "address"
-                    }
-                ],
-                "name": "coinsOfPlayer",
-                "outputs": [
-                    {
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "payable": false,
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "constant": true,
-                "inputs": [
-                    {
-                        "name": "_gameId",
-                        "type": "uint256"
-                    }
-                ],
-                "name": "getBoard",
-                "outputs": [
-                    {
-                        "name": "",
-                        "type": "uint8[8][8]"
-                    }
-                ],
-                "payable": false,
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "constant": true,
-                "inputs": [],
-                "name": "getLengthOfArrayAllGames",
-                "outputs": [
-                    {
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "payable": false,
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "constant": true,
-                "inputs": [],
-                "name": "getLengthOfArrayAllPlayer",
-                "outputs": [
-                    {
-                        "name": "",
-                        "type": "uint256"
-                    }
-                ],
-                "payable": false,
-                "stateMutability": "view",
-                "type": "function"
-            }
-        ];
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getLengthOfArrayAllGames",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "_gameId",
+				"type": "uint256"
+			}
+		],
+		"name": "getBoard",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint8[8][8]"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "allPlayer",
+		"outputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_gameId",
+				"type": "uint256"
+			},
+			{
+				"name": "_fromN",
+				"type": "uint8"
+			},
+			{
+				"name": "_fromC",
+				"type": "uint8"
+			},
+			{
+				"name": "_toN",
+				"type": "uint8"
+			},
+			{
+				"name": "_toC",
+				"type": "uint8"
+			}
+		],
+		"name": "makeMove",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "_player2",
+				"type": "address"
+			}
+		],
+		"name": "startNewGame",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [],
+		"name": "getLengthOfArrayAllPlayer",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "allGames",
+		"outputs": [
+			{
+				"name": "player1",
+				"type": "address"
+			},
+			{
+				"name": "player2",
+				"type": "address"
+			},
+			{
+				"name": "activePlayer",
+				"type": "address"
+			},
+			{
+				"name": "winner",
+				"type": "address"
+			},
+			{
+				"name": "finished",
+				"type": "bool"
+			},
+			{
+				"name": "coinPrize",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "depositEtherForCoins",
+		"outputs": [],
+		"payable": true,
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"constant": true,
+		"inputs": [
+			{
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "coinsOfPlayer",
+		"outputs": [
+			{
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"payable": false,
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [],
+		"name": "NewPlayerAdded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "_player1",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"name": "_player2",
+				"type": "address"
+			}
+		],
+		"name": "NewMatchCreated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "_gameId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"name": "_nextPlayer",
+				"type": "address"
+			}
+		],
+		"name": "GameFieldChanged",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"name": "_gameId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"name": "_winner",
+				"type": "address"
+			}
+		],
+		"name": "GameFinished",
+		"type": "event"
+	}
+];
     </script>
     <!-- functions to get contract and user account -->
     <script>

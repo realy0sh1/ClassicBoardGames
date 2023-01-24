@@ -168,10 +168,10 @@ contract Checkers {
     function checkMoveMan(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC, uint8 _currentPlayer, uint8 _nextPlayer) internal view returns(bool){
         uint8[8][8] storage gF = allGames[_gameId].board;
         
-        if((_toN == _fromN + 1 || _toN == _fromN - 1) && _fromC + 1 == _toC){
+        if((_toN == _fromN + 1 || _toN == _fromN - 1) && _fromC + (3 - _currentPlayer * 2) == _toC){
             return true;
         }
-        else if((_toN == _fromN + 2 || _toN == _fromN - 2) && _fromC + 2 == _toC){
+        else if((_toN == _fromN + 2 || _toN == _fromN - 2) && _fromC + (6 - _currentPlayer * 4) == _toC){
             require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] == 3 - _currentPlayer);
         }
     }
@@ -179,16 +179,16 @@ contract Checkers {
     function checkMoveKing(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC, uint8 _currentPlayer, uint8 _nextPlayer) internal view returns(bool){
         uint8[8][8] storage gF = allGames[_gameId].board;
         
-        if((_toN == _fromN + 1 || _toN == _fromN - 1) && _fromC + 1 == _toC){
+        if((_toN == _fromN + 1 || _toN == _fromN - 1) && _fromC + (3 - _currentPlayer * 2) == _toC){
             return true;
         }
-        else if((_toN == _fromN + 2 || _toN == _fromN - 2) && _fromC + 2 == _toC){
+        else if((_toN == _fromN + 2 || _toN == _fromN - 2) && _fromC + (6 - _currentPlayer * 4) == _toC){
             require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] == 3 - _currentPlayer);
         }
-        else if((_toN == _fromN + 1 || _toN == _fromN - 1) && _fromC - 1 == _toC){
+        else if((_toN == _fromN + 1 || _toN == _fromN - 1) && _fromC - (3 - _currentPlayer * 2) == _toC){
             return true;
         }
-        else if((_toN == _fromN + 2 || _toN == _fromN - 2) && _fromC - 2 == _toC){
+        else if((_toN == _fromN + 2 || _toN == _fromN - 2) && _fromC - (6 - _currentPlayer * 4) == _toC){
             require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] == 3 - _currentPlayer);
         }
     }
@@ -236,4 +236,5 @@ contract Checkers {
         return false;
     }
 }
+
 
