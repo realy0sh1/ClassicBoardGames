@@ -681,7 +681,6 @@
                 return;
             }
             let checkersGameStruct = await smartContract.methods.getBoard(_gameId).call();
-            console.log(checkersGameStruct);
             for (let z=1; z<9;z++) {
                 for (let n=0; n<8;n++) {
                     const c = ['A','B', 'C', 'D', 'E', 'F', 'G', 'H'];
@@ -693,6 +692,12 @@
                         break;
                     case "2":
                         sign = "&#9899;";
+                        break;
+                    case "3":
+                        sign = "&#11036;";
+                        break;
+                    case "4":
+                        sign = "&#11035;";
                         break;
                     default:
                         sign = "";
@@ -709,7 +714,6 @@
                 for (let n=0; n<8;n++) {
                     const c = ['A','B', 'C', 'D', 'E', 'F', 'G', 'H'];
                     $(`#field_${z+1}${c[n]}`).empty()
-                    console.log(`cleared field: ${z+1}${c[n]}`);
                 }
             }
         }
