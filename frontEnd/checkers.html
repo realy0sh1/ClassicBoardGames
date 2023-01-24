@@ -180,7 +180,7 @@
     </div>
     <!-- contract details  -->
     <script>
-        var smartContractAddress = "0xCBBc25B55afECC4d164fA41389942B45B508B8de";
+        var smartContractAddress = "0xef88d7bcfdfcc317aa26d5858d9d51b821606f1d";
         var smartContractABI = [
             {
                 "constant": false,
@@ -681,7 +681,6 @@
                 return;
             }
             let checkersGameStruct = await smartContract.methods.getBoard(_gameId).call();
-            console.log(checkersGameStruct);
             for (let z=1; z<9;z++) {
                 for (let n=0; n<8;n++) {
                     const c = ['A','B', 'C', 'D', 'E', 'F', 'G', 'H'];
@@ -689,11 +688,20 @@
                     
                     switch(marker) {
                     case "1":
+                        //white
                         sign = "&#9898;";
                         break;
                     case "2":
+                        //black
                         sign = "&#9899;";
                         break;
+                    case "3":
+                        // white checker
+                        sign= "&#11036;";
+                        break;
+                    case "4":
+                        // black checker
+                        sign="&#11035;";
                     default:
                         sign = "";
                     }
@@ -709,7 +717,6 @@
                 for (let n=0; n<8;n++) {
                     const c = ['A','B', 'C', 'D', 'E', 'F', 'G', 'H'];
                     $(`#field_${z+1}${c[n]}`).empty()
-                    console.log(`cleared field: ${z+1}${c[n]}`);
                 }
             }
         }
@@ -829,7 +836,6 @@
                 default:
                     console.log("Not a valid position");
             }
-            console.log(`works till here: ${moveFromN} ${moveFromC} -> ${moveToN} ${moveToC}`)
             await smartContract.methods.makeMove(currentGameId, moveFromN, moveFromC, moveToN, moveToC).send( {from: userAccount,value: "0"})
             .on("receipt", function(receipt) {
                 // do nothing
