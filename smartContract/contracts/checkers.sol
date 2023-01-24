@@ -116,7 +116,9 @@ contract Checkers {
         // check if move is possible
         require(checkIfMovePosible(_gameId, _fromN, _fromC, _toN, _toC, marker, markerOfNextPlayer));
         // make move
-        executeMove(_gameId, _fromN, _fromC, _toN, _toC);
+        if(executeMove(_gameId, _fromN, _fromC, _toN, _toC)){
+            nextPlayer = currentPlayer;
+        }
         // check for winner
         if(currentPlayerWon(_gameId, marker)){
             allGames[_gameId].finished = true;
@@ -149,22 +151,83 @@ contract Checkers {
 
     function checkIfMovePosible(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC, uint8 _currentPlayer, uint8 _nextPlayer) internal view returns(bool){
         uint8[8][8] storage gF = allGames[_gameId].board;
-        return true;
+
+        require(gF[_fromN][_fromC] % 2 == _currentPlayer);
+        require(gF[_fromN][_fromC] != 0);
+        require(gF[_toN][_toC] == 0);
+        if(((gF[_fromN][_fromC] - 1) / 2) == 0){
+            return checkMoveMan(_gameId, _fromN, _fromC, _toN, _toC, _currentPlayer, _nextPlayer);
+        }
+        else if(((gF[_fromN][_fromC] - 1) / 2) == 1){
+            return checkMoveKing(_gameId, _fromN, _fromC, _toN, _toC, _currentPlayer, _nextPlayer);
+        }
+
+        return false;
     }
 
-    function executeMove(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal{
+    function checkMoveMan(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC, uint8 _currentPlayer, uint8 _nextPlayer) internal view returns(bool){
+        uint8[8][8] storage gF = allGames[_gameId].board;
+        
+        if((_toN == _fromN + 1 || _toN == _fromN - 1) && _fromC + 1 == _toC){
+            return true;
+        }
+        else if((_toN == _fromN + 2 || _toN == _fromN - 2) && _fromC + 2 == _toC){
+            require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] == 3 - _currentPlayer);
+        }
+    }
+
+    function checkMoveKing(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC, uint8 _currentPlayer, uint8 _nextPlayer) internal view returns(bool){
+        uint8[8][8] storage gF = allGames[_gameId].board;
+        
+        if((_toN == _fromN + 1 || _toN == _fromN - 1) && _fromC + 1 == _toC){
+            return true;
+        }
+        else if((_toN == _fromN + 2 || _toN == _fromN - 2) && _fromC + 2 == _toC){
+            require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] == 3 - _currentPlayer);
+        }
+        else if((_toN == _fromN + 1 || _toN == _fromN - 1) && _fromC - 1 == _toC){
+            return true;
+        }
+        else if((_toN == _fromN + 2 || _toN == _fromN - 2) && _fromC - 2 == _toC){
+            require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] == 3 - _currentPlayer);
+        }
+    }
+
+    function executeMove(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal returns(bool){
         uint8[8][8] storage gF = allGames[_gameId].board;
         uint8 figure = gF[_fromN][_fromC];
+        bool hasNextMove = false;
         //move from
         gF[_fromN][_fromC] = 0;
+        // In case you hit a figure
+        if(_fromC + 2 == _toC || _fromC - 2 == _toC){
+            gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] = 0;
+            hasNextMove = true;
+        }
+        // In case a man gets crowned
+        if(figure < 3 && _toC == (2 - figure)*8){
+            figure += 2;
+            hasNextMove = false;
+        }
         // move to
         gF[_toN][_toC] = figure;
+        return hasNextMove;
     }
 
     function currentPlayerWon(uint _gameId, uint8 _m) internal view returns(bool) {
         // _m is marker of current player (1 white and 2 black)
         // storage means pointer to that
         uint8[8][8] storage gF = allGames[_gameId].board;
+
+        for (uint i=0; i<8; i++) {
+            for (uint j=0; j<8; j++) {
+                if((gF[i][j] % 2 != _m % 2)&&(gF[i][j] != 0)){
+                    // current player does not win, because other king is still alive
+                    return false;
+                }
+            }
+        }
+
         return false;
     }
 
@@ -173,3 +236,4 @@ contract Checkers {
         return false;
     }
 }
+
