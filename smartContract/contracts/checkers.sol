@@ -210,7 +210,7 @@ contract Checkers {
             hasNextMove = canHit(_gameId, _toN, _toC, figure);
         }
         // In case a man gets crowned
-        if(figure < 3 && _toN == (2 - figure)*8){
+        if(figure < 3 && _toN == (2 - figure)*7){
             figure += 2;
             hasNextMove = false;
         }
