@@ -172,7 +172,8 @@ contract Checkers {
             return true;
         }
         else if(_toN == _fromN + (6 - _currentPlayer * 4) && (_toC == _fromC + 2 || _toC == _fromC - 2)){
-            require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] == 3 - _currentPlayer);
+            require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] != 0);
+            require((gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] % 2) == (3 - _currentPlayer)%2);
             return true;
         }
         return false;
@@ -185,14 +186,16 @@ contract Checkers {
             return true;
         }
         else if(_toN == _fromN + (6 - _currentPlayer * 4) && (_toC == _fromC + 2 || _toC == _fromC - 2)){
-            require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] == 3 - _currentPlayer);
+            require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] != 0);
+            require((gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] % 2) == (3 - _currentPlayer)%2);
             return true;
         }
         else if(_fromN - (3 - _currentPlayer * 2) == _toN && (_toC == _fromC + 1 || _toC == _fromC - 1)){
             return true;
         }
         else if(_fromN - (6 - _currentPlayer * 4) == _toN && (_toC == _fromC + 2 || _toC == _fromC - 2)){
-            require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] == 3 - _currentPlayer);
+            require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] != 0);
+            require((gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] % 2) == (3 - _currentPlayer)%2);
             return true;
         }
         return false;
