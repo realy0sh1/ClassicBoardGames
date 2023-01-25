@@ -194,6 +194,9 @@ contract Chess {
         uint8 figure = gF[_fromN][_fromC];
         //move from
         gF[_fromN][_fromC] = 0;
+        if(figure % 10 == 1 && _toN == (2 - (figure/10))*7){
+            figure += 4;
+        }
         // move to
         gF[_toN][_toC] = figure;
     }
@@ -545,3 +548,4 @@ contract Chess {
         return true;
     }
 }
+

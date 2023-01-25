@@ -20,6 +20,7 @@ contract Checkers {
         address winner;
         bool finished;
         uint256 coinPrize;
+        uint256 noHits;
     }
     // internal coin: 1 coins = 0.1 ETH
     mapping (address => uint256) public coinsOfPlayer;
@@ -80,7 +81,7 @@ contract Checkers {
         // 1 means player 1 (WHITE)
         // 2 means player 2 (BLACK)
         // 0 means empty
-        gameId = allGames.push( CheckersGame([[1,0,1,0,1,0,1,0],[0,1,0,1,0,1,0,1],[1,0,1,0,1,0,1,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,2,0,2,0,2,0,2],[2,0,2,0,2,0,2,0],[0,2,0,2,0,2,0,2]], msg.sender, _player2, msg.sender, address(0), false, coinsPerGame.mul(2)) ).sub(1);
+        gameId = allGames.push( CheckersGame([[1,0,1,0,1,0,1,0],[0,1,0,1,0,1,0,1],[1,0,1,0,1,0,1,0],[0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0],[0,2,0,2,0,2,0,2],[2,0,2,0,2,0,2,0],[0,2,0,2,0,2,0,2]], msg.sender, _player2, msg.sender, address(0), false, coinsPerGame.mul(2), 0) ).sub(1);
         // emit event
         emit NewMatchCreated(msg.sender, _player2);
         // return gameId (position in array for new game)
@@ -209,8 +210,12 @@ contract Checkers {
         gF[_fromN][_fromC] = 0;
         // In case you hit a figure
         if(_fromC + 2 == _toC || _fromC - 2 == _toC){
+            allGames[_gameId].noHits = 0;
             gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] = 0;
             hasNextMove = canHit(_gameId, _toN, _toC, figure);
+        }
+        else{
+            allGames[_gameId].noHits++;
         }
         // In case a man gets crowned
         if(figure < 3 && _toN == (2 - figure)*7){
@@ -262,8 +267,7 @@ contract Checkers {
     }
 
     function isDraw(uint _gameId) internal view returns(bool){
-        uint8[8][8] storage gF = allGames[_gameId].board;
-        return false;
+        return allGames[_gameId].noHits > 19;
     }
 }
 
