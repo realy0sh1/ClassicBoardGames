@@ -224,16 +224,16 @@ contract Checkers {
 
     function canHit(uint _gameId, uint8 _toN, uint8 _toC, uint8 _figure) internal view returns(bool){
         uint8[8][8] storage gF = allGames[_gameId].board;
-        uint player = 2 - (_figure % 2);
-        bool forwardPossible = player == 1 && _toN < 6 || player == 2 && _toN > 1;
-        bool backPossible = (player == 1 && _toN > 1 || player == 2 && _toN < 6) && _figure > 2;
+        uint player = 2 - (_figure % 2); // 2
+        bool forwardPossible = player == 1 && _toN < 6 || player == 2 && _toN > 1; //true
+        bool backPossible = (player == 1 && _toN > 1 || player == 2 && _toN < 6) && _figure > 2; // false
         bool canHitLeft = false;
         bool canHitRight = false;
         if(forwardPossible && _toC > 1){
-            canHitLeft = gF[_toN + (3 - player * 2)][_toC - 1] == 3 - player && gF[_toN - (6 - player * 4)][_toC - 2] == 0;
+            canHitLeft = gF[_toN + (3 - player * 2)][_toC - 1] == 3 - player && gF[_toN + (6 - player * 4)][_toC - 2] == 0;
         }
         if (forwardPossible && _toC < 6){
-            canHitRight = gF[_toN + (3 - player * 2)][_toC + 1] == 3 - player && gF[_toN - (6 - player * 4)][_toC + 2] == 0;
+            canHitRight = gF[_toN + (3 - player * 2)][_toC + 1] == 3 - player && gF[_toN + (6 - player * 4)][_toC + 2] == 0;
         }
         if (backPossible && _toC > 1 ){
             canHitLeft = canHitLeft || gF[_toN - (3 - player * 2)][_toC - 1] == 3 - player && gF[_toN - (6 - player * 4)][_toC - 2] == 0;
