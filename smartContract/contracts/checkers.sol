@@ -114,7 +114,7 @@ contract Checkers {
             nextPlayer = allGames[_gameId].player1;
         }
         // check if move is possible
-        require(checkIfMovePosible(_gameId, _fromN, _fromC, _toN, _toC, marker, markerOfNextPlayer));
+        require(checkIfMovePosible(_gameId, _fromN, _fromC, _toN, _toC, marker));
         // make move
         if(executeMove(_gameId, _fromN, _fromC, _toN, _toC)){
             nextPlayer = currentPlayer;
@@ -149,48 +149,53 @@ contract Checkers {
         }
     }
 
-    function checkIfMovePosible(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC, uint8 _currentPlayer, uint8 _nextPlayer) internal view returns(bool){
+    function checkIfMovePosible(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC, uint8 _currentPlayer) internal view returns(bool){
         uint8[8][8] storage gF = allGames[_gameId].board;
 
-        require(gF[_fromN][_fromC] % 2 == _currentPlayer);
+        require(gF[_fromN][_fromC] % 2 == _currentPlayer % 2);
         require(gF[_fromN][_fromC] != 0);
         require(gF[_toN][_toC] == 0);
         if(((gF[_fromN][_fromC] - 1) / 2) == 0){
-            return checkMoveMan(_gameId, _fromN, _fromC, _toN, _toC, _currentPlayer, _nextPlayer);
+            return checkMoveMan(_gameId, _fromN, _fromC, _toN, _toC, _currentPlayer);
         }
         else if(((gF[_fromN][_fromC] - 1) / 2) == 1){
-            return checkMoveKing(_gameId, _fromN, _fromC, _toN, _toC, _currentPlayer, _nextPlayer);
+            return checkMoveKing(_gameId, _fromN, _fromC, _toN, _toC, _currentPlayer);
         }
 
         return false;
     }
 
-    function checkMoveMan(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC, uint8 _currentPlayer, uint8 _nextPlayer) internal view returns(bool){
+    function checkMoveMan(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC, uint8 _currentPlayer) internal view returns(bool){
         uint8[8][8] storage gF = allGames[_gameId].board;
         
-        if((_toN == _fromN + 1 || _toN == _fromN - 1) && _fromC + (3 - _currentPlayer * 2) == _toC){
+        if(_toN == _fromN + (3 - _currentPlayer * 2) && (_toC + 1 == _fromC || _toC - 1 == _fromC)){
             return true;
         }
-        else if((_toN == _fromN + 2 || _toN == _fromN - 2) && _fromC + (6 - _currentPlayer * 4) == _toC){
+        else if(_toN == _fromN + (6 - _currentPlayer * 4) && (_toC == _fromC + 2 || _toC == _fromC - 2)){
             require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] == 3 - _currentPlayer);
+            return true;
         }
+        return false;
     }
 
-    function checkMoveKing(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC, uint8 _currentPlayer, uint8 _nextPlayer) internal view returns(bool){
+    function checkMoveKing(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC, uint8 _currentPlayer) internal view returns(bool){
         uint8[8][8] storage gF = allGames[_gameId].board;
         
-        if((_toN == _fromN + 1 || _toN == _fromN - 1) && _fromC + (3 - _currentPlayer * 2) == _toC){
+        if(_toN == _fromN + (3 - _currentPlayer * 2) && (_toC + 1 == _fromC || _toC - 1 == _fromC)){
             return true;
         }
-        else if((_toN == _fromN + 2 || _toN == _fromN - 2) && _fromC + (6 - _currentPlayer * 4) == _toC){
+        else if(_toN == _fromN + (6 - _currentPlayer * 4) && (_toC == _fromC + 2 || _toC == _fromC - 2)){
             require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] == 3 - _currentPlayer);
-        }
-        else if((_toN == _fromN + 1 || _toN == _fromN - 1) && _fromC - (3 - _currentPlayer * 2) == _toC){
             return true;
         }
-        else if((_toN == _fromN + 2 || _toN == _fromN - 2) && _fromC - (6 - _currentPlayer * 4) == _toC){
-            require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] == 3 - _currentPlayer);
+        else if(_fromN - (3 - _currentPlayer * 2) == _toN && (_toC == _fromC + 1 || _toC == _fromC - 1)){
+            return true;
         }
+        else if(_fromN - (6 - _currentPlayer * 4) == _toN && (_toC == _fromC + 2 || _toC == _fromC - 2)){
+            require(gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] == 3 - _currentPlayer);
+            return true;
+        }
+        return false;
     }
 
     function executeMove(uint _gameId, uint8 _fromN, uint8 _fromC, uint8 _toN, uint8 _toC) internal returns(bool){
@@ -202,16 +207,38 @@ contract Checkers {
         // In case you hit a figure
         if(_fromC + 2 == _toC || _fromC - 2 == _toC){
             gF[(_fromN + _toN) / 2][(_fromC + _toC) / 2] = 0;
-            hasNextMove = true;
+            hasNextMove = canHit(_gameId, _toN, _toC, figure);
         }
         // In case a man gets crowned
-        if(figure < 3 && _toC == (2 - figure)*8){
+        if(figure < 3 && _toN == (2 - figure)*8){
             figure += 2;
             hasNextMove = false;
         }
         // move to
         gF[_toN][_toC] = figure;
         return hasNextMove;
+    }
+
+    function canHit(uint _gameId, uint8 _toN, uint8 _toC, uint8 _figure) internal view returns(bool){
+        uint8[8][8] storage gF = allGames[_gameId].board;
+        uint player = 2 - (_figure % 2);
+        bool forwardPossible = player == 1 && _toN < 6 || player == 2 && _toN > 1;
+        bool backPossible = (player == 1 && _toN > 1 || player == 2 && _toN < 6) && _figure > 2;
+        bool canHitLeft = false;
+        bool canHitRight = false;
+        if(forwardPossible && _toC > 1){
+            canHitLeft = gF[_toN + (3 - player * 2)][_toC - 1] == 3 - player && gF[_toN - (6 - player * 4)][_toC - 2] == 0;
+        }
+        if (forwardPossible && _toC < 6){
+            canHitRight = gF[_toN + (3 - player * 2)][_toC + 1] == 3 - player && gF[_toN - (6 - player * 4)][_toC + 2] == 0;
+        }
+        if (backPossible && _toC > 1 ){
+            canHitLeft = canHitLeft || gF[_toN - (3 - player * 2)][_toC - 1] == 3 - player && gF[_toN - (6 - player * 4)][_toC - 2] == 0;
+        }
+        if (backPossible && _toC < 6){
+            canHitRight = canHitRight || gF[_toN - (3 - player * 2)][_toC + 1] == 3 - player && gF[_toN - (6 - player * 4)][_toC + 2] == 0;
+        }
+        return canHitLeft || canHitRight;
     }
 
     function currentPlayerWon(uint _gameId, uint8 _m) internal view returns(bool) {
@@ -222,13 +249,13 @@ contract Checkers {
         for (uint i=0; i<8; i++) {
             for (uint j=0; j<8; j++) {
                 if((gF[i][j] % 2 != _m % 2)&&(gF[i][j] != 0)){
-                    // current player does not win, because other king is still alive
+                    // current player does not win, because other figure is still alive
                     return false;
                 }
             }
         }
 
-        return false;
+        return true;
     }
 
     function isDraw(uint _gameId) internal view returns(bool){
